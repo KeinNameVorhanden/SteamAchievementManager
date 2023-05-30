@@ -25,6 +25,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>

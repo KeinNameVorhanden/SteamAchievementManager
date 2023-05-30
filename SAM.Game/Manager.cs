@@ -20,6 +20,7 @@
  *    distribution.
  */
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -670,12 +671,16 @@ namespace SAM.Game
         {
             this._ReloadButton.Enabled = false;
             this._StoreButton.Enabled = false;
+            this._ImportStats.Enabled = false;
+            this._ExportStats.Enabled = false;
         }
 
         private void EnableInput()
         {
             this._ReloadButton.Enabled = true;
             this._StoreButton.Enabled = true;
+            this._ImportStats.Enabled = true;
+            this._ExportStats.Enabled = true;
         }
 
         private void OnTimer(object sender, EventArgs e)
@@ -860,6 +865,38 @@ namespace SAM.Game
                     MessageBoxIcon.Error);
                 e.NewValue = e.CurrentValue;
             }
+        }
+
+        private void _ExportStats_Click(object sender, EventArgs e)
+        {
+            var statistics = this._Statistics.ToList();
+
+            var jsonStats = JsonConvert.SerializeObject(statistics);
+
+            File.WriteAllText("exported_stats.json", jsonStats);
+
+            /*if (statistics.Count == 0)
+            {
+                return;
+            }
+
+            foreach (Stats.StatInfo stat in statistics)
+            {
+                if (stat is Stats.IntStatInfo)
+                {
+                    var intStat = (Stats.IntStatInfo)stat;
+                    var intVal = intStat.IntValue;
+                }
+                else if (stat is Stats.FloatStatInfo)
+                {
+                    var floatStat = (Stats.FloatStatInfo)stat;
+                    var floatVal = floatStat.FloatValue;
+                }
+                else
+                {
+
+                }
+            }*/
         }
     }
 }
